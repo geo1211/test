@@ -25,7 +25,9 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "apiVersion": "2015-06-15",
     "adminUsername": "flashdev",
-    "adminPassword": "!Flash1"
+    "adminPassword": "!Flash1",
+    "dnsLabelPrefix": "",
+    "ubuntuOSVersion": "15.10"
   },
   "resources": [
     {
@@ -45,7 +47,7 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+          "domainNameLabel": "[variables('dnsLabelPrefix')]"
         }
       }
     },
@@ -118,7 +120,7 @@
           "imageReference": {
             "publisher": "[variables('imagePublisher')]",
             "offer": "[variables('imageOffer')]",
-            "sku": "[parameters('ubuntuOSVersion')]",
+            "sku": "[variables('ubuntuOSVersion')]",
             "version": "latest"
           },
           "osDisk": {
