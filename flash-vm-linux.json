@@ -4,7 +4,7 @@
   "parameters": {
   },
   "variables": {
-    "storageAccountName": "devflashpremiumstoragev2",
+    "storageAccountName": "devflashstoragev2",
     "location": "[resourceGroup().location]",
     "dataDisk1VhdName": "datadisk1",
     "imagePublisher": "Canonical",
