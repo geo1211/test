@@ -14,7 +14,7 @@
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Default",
     "subnetPrefix": "10.0.0.0/24",
-    "storageAccountType": "Premium_LRS",
+    "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "myPublicIP1",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "dev-flash-flume-container-1",
