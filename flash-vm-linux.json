@@ -4,7 +4,7 @@
   "parameters": {
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
+    "storageAccountName": "devflashpremiumstoragev2",
     "location": "[resourceGroup().location]",
     "dataDisk1VhdName": "datadisk1",
     "imagePublisher": "Canonical",
@@ -12,18 +12,20 @@
     "OSDiskName": "osdiskforlinuxsimple",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
+    "subnetName": "Default",
     "subnetPrefix": "10.0.0.0/24",
-    "storageAccountType": "Standard_LRS",
+    "storageAccountType": "Premium_LRS",
     "publicIPAddressName": "myPublicIP1",
     "publicIPAddressType": "Dynamic",
-    "vmStorageAccountContainerName": "vhds",
+    "vmStorageAccountContainerName": "dev-flash-flume-container-1",
     "vmName": "MyUbuntuVM1",
-    "vmSize": "Standard_D2",
-    "virtualNetworkName": "MyVNET",
+    "vmSize": "Standard_DS3",
+    "virtualNetworkName": "development-v2-vn",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
-    "apiVersion": "2015-06-15"
+    "apiVersion": "2015-06-15",
+    "adminUsername": "flashdev",
+    "adminPassword": "!Flash1"
   },
   "resources": [
     {
