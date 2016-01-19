@@ -4,7 +4,7 @@
   "parameters": {
   },
   "variables": {
-    "storageAccountName": "devflashstoragev2",
+    "storageAccountName": "devFlashMyUbuntuStorage1",
     "location": "[resourceGroup().location]",
     "dataDisk1VhdName": "datadisk1",
     "imagePublisher": "Canonical",
@@ -30,6 +30,15 @@
     "ubuntuOSVersion": "15.10"
   },
   "resources": [
+    {		      
+      "type": "Microsoft.Storage/storageAccounts",		
+      "name": "[variables('storageAccountName')]",		
+      "apiVersion": "[variables('apiVersion')]",		
+      "location": "[variables('location')]",		
+      "properties": {		
+        "accountType": "[variables('storageAccountType')]"		
+      }		
+    },
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/publicIPAddresses",
