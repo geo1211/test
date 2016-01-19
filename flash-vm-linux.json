@@ -27,7 +27,8 @@
     "adminUsername": "flashdev",
     "adminPassword": "!Flash1",
     "dnsLabelPrefix": "dnslabelprefix1",
-    "ubuntuOSVersion": "15.10"
+    "ubuntuOSVersion": "15.10",
+    "availabilitySetName": "devFlashFlumeAvailabilitySet"
   },
   "resources": [
     {		      
@@ -38,6 +39,12 @@
       "properties": {		
         "accountType": "[variables('storageAccountType')]"		
       }		
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[variables('availabilitySetName')]",
+      "location": "[resourceGroup().location]"
     },
     {
       "apiVersion": "[variables('apiVersion')]",
@@ -79,7 +86,8 @@
       "location": "[variables('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -108,6 +116,9 @@
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
       "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+        },
         "hardwareProfile": {
           "vmSize": "[variables('vmSize')]"
         },
