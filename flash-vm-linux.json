@@ -2,33 +2,61 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "env": {
+      "type": "string",
+      "defaultValue": "dev",
+      "allowedValues": [
+        "dev", "qa", "prod"
+      ],
+      "metadata": {
+        "description": "Prefix for some variables."
+      }
+    },
+    "nth": {
+      "type": "string",
+      "metadata": {
+        "description": "Just the running count of machine, or any postfix to variables."
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Username for the Virtual Machine."
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the Virtual Machine."
+      }
+    }
   },
   "variables": {
-    "storageAccountName": "devFlashMyUbuntuStorage1",
+    "storageAccountName": "[concat(parameters('env'), 'FlashStorage', parameters('nth'))]",
     "location": "[resourceGroup().location]",
-    "dataDisk1VhdName": "datadisk1",
+    "dataDisk1VhdName": "[concat('datadisk', parameters('nth'))]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
-    "OSDiskName": "osdisk1",
-    "nicName": "myVMNic1",
+    "OSDiskName": "[concat('osdisk', parameters('nth'))]",
+    "nicName": "[concat('myVMNic', parameters('nth'))]",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Default",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "myPublicIP1",
+    "publicIPAddressName": "[concat('myPublicIP1', parameters('nth'))]",
     "publicIPAddressType": "Dynamic",
-    "vmStorageAccountContainerName": "dev-flash-flume-container-1",
-    "vmName": "MyUbuntuVM1",
+    "vmStorageAccountContainerName": "[concat(parameters('env'), '-flash-flume-cont-', parameters('nth'))]",
+    "vmName": "[concat('FlashFlumeVM', parameters('nth'))]",
     "vmSize": "Standard_DS3",
     "virtualNetworkName": "development-v2-vn",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "apiVersion": "2015-06-15",
-    "adminUsername": "flashdev",
-    "adminPassword": "!Flash1",
-    "dnsLabelPrefix": "dnslabelprefix1",
+    "adminUsername": "[parameters('adminUsername')]]",
+    "adminPassword": "[parameters('adminPassword')]]",
+    "dnsLabelPrefix": "[concat('dnslabelprefix', parameters('nth'))]",
     "ubuntuOSVersion": "15.10",
-    "availabilitySetName": "devFlashFlumeAvailabilitySet"
+    "availabilitySetName": "[concat(parameters('env'),'FlashFlumeAvailabilitySet')]",
   },
   "resources": [
     {		      
