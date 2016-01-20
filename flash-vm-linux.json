@@ -52,8 +52,6 @@
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "apiVersion": "2015-06-15",
-    "adminUsername": "[parameters('adminUsername')]]",
-    "adminPassword": "[parameters('adminPassword')]]",
     "dnsLabelPrefix": "[concat('dnslabelprefix', parameters('nth'))]",
     "ubuntuOSVersion": "15.10",
     "availabilitySetName": "[concat(parameters('env'),'FlashFlumeAvailabilitySet')]",
@@ -152,8 +150,8 @@
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
-          "adminUsername": "[variables('adminUsername')]",
-          "adminPassword": "[variables('adminPassword')]"
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
